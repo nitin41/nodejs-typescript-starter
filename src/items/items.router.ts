@@ -1,18 +1,18 @@
+/* eslint-disable import/no-unresolved */
+/* eslint-disable import/prefer-default-export */
 /**
  * Required External Modules and Interfaces
  */
 
-import express, { Request, Response } from "express";
-import * as ItemService from "./items.service";
-import { BaseItem, Item } from "./item.interface";
-
-
+import express, { Request, Response, Router } from 'express';
+import * as ItemService from './items.service';
+import { BaseItem, Item } from './item.interface';
 
 /**
  * Router Definition
  */
 
-export const itemsRouter = express.Router();
+export const itemsRouter: Router = express.Router();
 
 /**
  * Controller Definitions
@@ -20,7 +20,7 @@ export const itemsRouter = express.Router();
 
 // GET items
 
-itemsRouter.get("/", async (req: Request, res: Response) => {
+itemsRouter.get('/', async (req: Request, res: Response) => {
   try {
     const items: Item[] = await ItemService.findAll();
 
@@ -32,7 +32,7 @@ itemsRouter.get("/", async (req: Request, res: Response) => {
 
 // GET items/:id
 
-itemsRouter.get("/:id", async (req: Request, res: Response) => {
+itemsRouter.get('/:id', async (req: Request, res: Response) => {
   const id: number = parseInt(req.params.id, 10);
 
   try {
@@ -42,7 +42,7 @@ itemsRouter.get("/:id", async (req: Request, res: Response) => {
       return res.status(200).send(item);
     }
 
-    res.status(404).send("item not found");
+    res.status(404).send('item not found');
   } catch (e) {
     res.status(500).send(e.message);
   }
@@ -50,7 +50,7 @@ itemsRouter.get("/:id", async (req: Request, res: Response) => {
 
 // POST items
 
-itemsRouter.post("/", async (req: Request, res: Response) => {
+itemsRouter.post('/', async (req: Request, res: Response) => {
   try {
     const item: BaseItem = req.body;
 
@@ -64,7 +64,7 @@ itemsRouter.post("/", async (req: Request, res: Response) => {
 
 // PUT items/:id
 
-itemsRouter.put("/:id", async (req: Request, res: Response) => {
+itemsRouter.put('/:id', async (req: Request, res: Response) => {
   const id: number = parseInt(req.params.id, 10);
 
   try {
@@ -87,7 +87,7 @@ itemsRouter.put("/:id", async (req: Request, res: Response) => {
 
 // DELETE items/:id
 
-itemsRouter.delete("/:id", async (req: Request, res: Response) => {
+itemsRouter.delete('/:id', async (req: Request, res: Response) => {
   try {
     const id: number = parseInt(req.params.id, 10);
     await ItemService.remove(id);

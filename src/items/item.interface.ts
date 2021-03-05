@@ -7,7 +7,6 @@ export interface BaseItem {
   image: string;
 }
 
-
 export interface Item extends BaseItem {
   id: number;
 }
